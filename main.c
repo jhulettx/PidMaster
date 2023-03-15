@@ -87,10 +87,11 @@ void main(void)
     /* Simulate response using test system */
     float setpoint = 2.0;
 //    float setpoint = 2.0f;
+    pid.out = 2.2;
+    test = 0;
     
     for (float t = 0.0; t <= SIMULATION_TIME_MAX; t += SAMPLE_TIME_S) 
     {
-
         /* Get measurement from system */
         float measurement = TestSystem_Update(pid.out);
         test = 1;
@@ -98,7 +99,6 @@ void main(void)
         PIDController_Update(&pid, setpoint, measurement);
         test = 2;
 //        printf("%f\t%f\t%f\r\n", t, measurement, pid.out);
-
     }
 //    return 0;
     

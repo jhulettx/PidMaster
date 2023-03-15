@@ -10,7 +10,6 @@ void PIDController_Init(PIDController *pid) {
 	pid->prevMeasurement = 0.0;
 
 	pid->out = 0.0;
-
 }
 
 float PIDController_Update(PIDController *pid, float setpoint, float measurement) {
@@ -40,18 +39,14 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
     } else if (pid->integrator < pid->limMinInt) {
 
         pid->integrator = pid->limMinInt;
-
     }
-
 
 	/*
 	* Derivative (band-limited differentiator)
-	*/
-		
+	*/	
     pid->differentiator = -(2.0 * pid->Kd * (measurement - pid->prevMeasurement)	/* Note: derivative on measurement, therefore minus sign in front of equation! */
                         + (2.0 * pid->tau - pid->T) * pid->differentiator)
                         / (2.0 * pid->tau + pid->T);
-
 
 	/*
 	* Compute output and apply limits
@@ -65,7 +60,6 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
     } else if (pid->out < pid->limMin) {
 
         pid->out = pid->limMin;
-
     }
 
 	/* Store error and measurement for later use */
@@ -74,5 +68,4 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
 
 	/* Return controller output */
     return pid->out;
-
 }

@@ -47,7 +47,6 @@ typedef struct {
 
 	/* Controller output */
 	float out;
-
 } PIDController;
 
 void  PIDController_Init(PIDController *pid);
